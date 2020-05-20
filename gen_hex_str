@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+  echo  "usage:"
+  echo  "  gen_hex_str <num bytes>"
+  exit 1
+fi
+
+num_bytes=$1
+
+openssl rand -hex $num_bytes

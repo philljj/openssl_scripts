@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# A tiny script to check what TLS versions ruby supports.
+#
+# Old versions of Ruby can be patched to support TLSv1_2 with this:
+#   https://gist.github.com/kriansa/dd1b9a0d8dfec776fc91
+#
+# Run this before and after rebuilding ruby to verify it picks up TLSv1_2.
+#
+
+which ruby
+ruby --version
+ruby -ropenssl -e 'puts "SSLv2 support: #{OpenSSL::SSL::SSLContext::METHODS.include?(:SSLv2)}"'
+ruby -ropenssl -e 'puts "SSLv3 support: #{OpenSSL::SSL::SSLContext::METHODS.include?(:SSLv3)}"'
+ruby -ropenssl -e 'puts "TLSv1 support: #{OpenSSL::SSL::SSLContext::METHODS.include?(:TLSv1)}"'
+ruby -ropenssl -e 'puts "TLSv1_1 support: #{OpenSSL::SSL::SSLContext::METHODS.include?(:TLSv1_1)}"'
+ruby -ropenssl -e 'puts "TLSv1_2 support: #{OpenSSL::SSL::SSLContext::METHODS.include?(:TLSv1_2)}"'
